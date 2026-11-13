@@ -1,0 +1,17 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      x402PaymentHeader:
+        type: string
+        default: ""
+        description: Optional Base USDC x402 payment header for paid target & calldata calls.
+  commandFunction: |-
+    (config) => ({
+      command: 'python',
+      args: ['server.py'],
+      env: {
+        APEXLIQRADAR_X402_PAYMENT: config.x402PaymentHeader || ''
+      }
+    })
